@@ -16,9 +16,98 @@ struct node1d {
     char *name;
     struct node2d *down;
   };
-int main(){
 
-  //insertFront2D name
+int main(){
+  struct node2d* head = NULL;
+  head = (struct node2d*)malloc(sizeof(struct node2d));
+
+
+  //insertFront2D name NAME IS VARIABLE AS WORD
+  struct node2d* insert_node2d_head(struct node2d *head, char *word) {
+      struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
+      temp->name = word;
+      if(head==NULL) {
+          temp->next = NULL;
+          head = temp;
+      }
+      else {
+          temp->next = head->next;
+          head->next = temp;
+      }
+      return head;
+  }
+
+
+  //insertbefore2D name beforename
+
+  struct node2d* insert_node2d_tail(struct node2d *head, char *word, char *targetWord) {
+      if(head==NULL) {
+        printf("There is no target string on the list\n");
+        exit(0);
+      }else if(head->name==targetWord){
+        struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
+        temp->name = word;
+        temp->next = head->next;
+        head->next = temp;
+      }
+
+      else {
+          struct node2d *node = head;
+          while(node->next->name!=targetWord) {
+
+            if(node->next!=NULL){
+              printf("There is no target string on the list\n");
+              exit(0);
+            }
+            node=node->next;
+
+          }
+          struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
+          temp->data = word;
+
+          temp->next = node->next;
+          node->next = temp;
+          return head;
+      }
+  }
+
+  //insertFront1D name name2D
+  struct node2d* insert_node2d_tail(struct node2d *head, char *word, char *targetWord){
+
+    if(head==NULL){
+      printf("There is no target string on the list\n" );
+      exit(0);
+    }
+    struct node2d *node = head;
+    while(node->name!=targetWord){
+
+      if(node->next==NULL){
+        printf("There is no target string on the list\n" );
+        exit(0);
+      }
+      node=node->next;
+
+    }
+
+    if(node->first==NULL){
+      struct node1d *temp = (struct node1d*) malloc(sizeof(struct node1d));
+      
+
+    }
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+/*
  char sentence[20];
 
   while (getword(sentence,20) != EOF){
@@ -44,27 +133,11 @@ int main(){
     }
     printf("first line %s\n",newString[0]);
     printf("second line %s\n",newString[1]);
-    printf("third line %s\n",newString[2]);
-  /*  if("inserFront2D"){
-      struct node2d* head=NULL;
-      head= (struct node2d*)malloc(sizeof(struct node2d));
-      head->data ="name";
-      head->first= NULL;
-      head->down= NULL;*/
-    }
+    printf("third line %s\n",newString[2]); */
 
+}
 
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
