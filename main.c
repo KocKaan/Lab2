@@ -35,11 +35,11 @@ void printAll(struct node2d *head){
   while(temp!=NULL) {
   //  print_list(temp->first);
   printf("2d node: %s\n", temp->name);
-  printf("\n");
+
   if(temp->first!=NULL){
     struct node1d *tempo = temp->first;
     while(tempo!=NULL) {
-        printf("1d Node: %s ",tempo->name);
+        printf("   1d Node: %s \n",tempo->name);
         tempo = tempo->next;
     }
   }
@@ -108,7 +108,7 @@ void insertFront1D(struct node2d *head, char *word, char *targetWord2D){
 
 void insertBefore1D(struct node2d *head,char *word, char *targetWord1D){
   if(head->down ==NULL) {
-    printf("There is no target string on the list\n");
+    printf("There is no target string on the listt\n");
     exit(0);
   }
   struct node2d *node = head->down;
@@ -118,19 +118,35 @@ void insertBefore1D(struct node2d *head,char *word, char *targetWord1D){
     if(node->first!=NULL){
       struct node1d *node1d= node->first;
 
+
       if(strcmp(node1d->name,targetWord1D)==0){
         struct node1d *temp = (struct node1d*) malloc(sizeof(struct node1d));
         temp->name= word;
 
         temp->next= node->first;
         node->first=temp;
+        return;
       }else{
-        while(strcmp(node1d->name,targetWord1D)1=)
+        while(strcmp(node1d->next->name,targetWord1D)!=0){
+          node1d=node1d->next;
+        }
+
+        if(strcmp(node1d->next->name,targetWord1D)==0){
+          struct node1d *temp = (struct node1d*) malloc(sizeof(struct node1d));
+          temp->name= word;
+
+          temp->next= node1d->next;
+          node1d->next=temp;
+          return;
+        }
+
       }
 
     }
-
+    node=node->down;
   }
+    printf("There is no target string on the list.\n");
+    exit(0);
 
 
 }
@@ -192,10 +208,17 @@ int main(){
 
     }
     //insertBefore1D name beforeName1D
-    if(strcmp(sentence,"insertBefore1D")){
+    if(strcmp(sentence,"insertBefore1D")==0){
+      getword(word,20);
+      getword(targetWord,20);
 
+      char * word1 =(char*)malloc(strlen(word)*sizeof(char));
+      strcpy(word1 ,word);
 
+      char * targetWord1 =(char*)malloc(strlen(word)*sizeof(char));
+      strcpy(targetWord1 ,targetWord);
 
+      insertBefore1D(head,word1,targetWord1);
 
     }
 
@@ -207,7 +230,7 @@ int main(){
       }
 
 
-      //somethinf
+      //print1DList name2D
 
       }
   //    printf("head name: %s\n",head->down->name);
