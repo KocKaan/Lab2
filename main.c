@@ -34,12 +34,12 @@ void printAll(struct node2d *head){
   struct node2d *temp = head->down;
   while(temp!=NULL) {
   //  print_list(temp->first);
-  printf("2d node: %s\n", temp->name);
+  printf("2d node name= %s\n", temp->name);
 
   if(temp->first!=NULL){
     struct node1d *tempo = temp->first;
     while(tempo!=NULL) {
-        printf("   1d Node: %s \n",tempo->name);
+        printf("   1d Node name= %s \n",tempo->name);
         tempo = tempo->next;
     }
   }
@@ -150,9 +150,64 @@ void insertBefore1D(struct node2d *head,char *word, char *targetWord1D){
 
 
 }
+void print1DList(struct node2d *head, char *targetWord2D){
 
+  if(head->down ==NULL) {
+    printf("There is no target string on the list\n");
+    exit(0);
+  }
 
+  struct node2d *node = head->down;
+  while(strcmp(node->name,targetWord2D)!=0){
 
+    if(node->down==NULL){
+      printf("There is no target string on the list\n" );
+      exit(0);
+    }
+    node=node->down;
+
+  }
+  if(node->first!=NULL){
+    struct node1d *tempo = node->first;
+    while(tempo!=NULL) {
+        printf("1d Node name= %s \n",tempo->name);
+        tempo = tempo->next;
+    }
+  }
+
+}
+
+void find1D(struct node2d *head, char *targetWord1D){
+  struct node2d *temp = head->down;
+  while(temp!=NULL) {
+
+  if(temp->first!=NULL){
+    struct node1d *tempo = temp->first;
+    while(tempo!=NULL) {
+      if(strcmp(tempo->name,targetWord1D)==0){
+        printf("found\n");
+        return;
+      }
+        tempo = tempo->next;
+    }
+  }
+    temp = temp->down;
+}
+printf("not found\n" );
+
+}
+
+void find2D(struct node2d *head, char *targetWord2D){
+  struct node2d *temp = head->down;
+  while(temp!=NULL) {
+  if(strcmp(temp->name,targetWord2D)==0){
+    printf("found\n");
+    return;
+  }
+    temp = temp->down;
+  }
+  printf("not found\n");
+}
 
 
 
@@ -231,112 +286,40 @@ int main(){
 
 
       //print1DList name2D
+      if(strcmp(sentence,"print1DList")==0){
+         getword(targetWord,20);
+
+         char * targetWord1 =(char*)malloc(strlen(word)*sizeof(char));
+         strcpy(targetWord1 ,targetWord);
+
+         print1DList(head,targetWord1);
 
       }
-  //    printf("head name: %s\n",head->down->name);
-    //  printf("head next name: %s\n",head->down->down->name);
-      //printf("head next next name: %s\n",head->down->down->down->name);
+
+
+      //find1D name1D
+      if(strcmp(sentence,"find1D")==0){
+        getword(targetWord,20);
+
+        char * targetWord1 =(char*)malloc(strlen(word)*sizeof(char));
+        strcpy(targetWord1 ,targetWord);
+
+        find1D(head, targetWord1);
+      }
+
+      //find2D name2D
+      if(strcmp(sentence,"find2D")==0){
+        getword(targetWord,20);
+
+        char * targetWord1 =(char*)malloc(strlen(word)*sizeof(char));
+        strcpy(targetWord1 ,targetWord);
+
+        find2D(head,targetWord1);
+      }
+
+      }
 
   }
-
-
-  /*insertFront2D name NAME IS VARIABLE AS WORD
-  struct node2d* insert_node2d_head(struct node2d *head, char *word) {
-      struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
-      temp->name = word;
-      if(head==NULL) {
-          temp->next = NULL;
-          head = temp;
-      }
-      else {
-          temp->next = head->next;
-          head->next = temp;
-      }
-      return head;
-  }*/
-
-
-  /* insertbefore2D name beforename
-    struct node2d* insert_node2d_tail(struct node2d *head, char *word, char *targetWord) {
-      if(head==NULL) {
-        printf("There is no target string on the list\n");
-        exit(0);
-      }else if(head->name==targetWord){
-        struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
-        temp->name = word;
-        temp->next = head->next;
-        head->next = temp;
-      }
-
-      else {
-          struct node2d *node = head;
-          while(node->next->name!=targetWord) {
-
-            if(node->next!=NULL){
-              printf("There is no target string on the list\n");
-              exit(0);
-            }
-            node=node->next;
-
-          }
-          struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
-          temp->data = word;
-
-          temp->next = node->next;
-          node->next = temp;
-          return head;
-      }
-  }*/
-
-  /*insertFront1D name name2D
-  struct node2d* insert_node2d_tail(struct node2d *head, char *word, char *targetWord){
-
-    if(head==NULL){
-      printf("There is no target string on the list\n" );
-      exit(0);
-    }
-    struct node2d *node = head;
-    while(node->name!=targetWord){
-
-      if(node->next==NULL){
-        printf("There is no target string on the list\n" );
-        exit(0);
-      }
-      node=node->next;
-
-    }
-
-    if(node->first==NULL){
-      struct node1d *temp = (struct node1d*) malloc(sizeof(struct node1d));
-      temp->name= word;
-      node->first= temp;
-      temp->next= NULL;
-
-    }else{
-      struct node1d *temp = (struct node1d*) malloc(sizeof(struct node1d));
-      temp->name= word;
-
-      temp->next= node->first;
-      node->next=temp;
-    }
-
-  }*/
-
-  //insertBefore1D name beforeName1D
-
-
-
-
-
-/*  void print_list(struct node1d *head);
-  void print_list(struct node1d *head) {
-      struct node1d *temp = head;
-      while(temp!=NULL) {
-          printf("%s ",temp->name);
-          temp = temp->next;
-      }
-      printf("\n");
-  }*/
 
 
 
